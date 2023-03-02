@@ -1,18 +1,20 @@
-
+//I begin by setting all my variables.
 var saveButton = document.querySelectorAll(".saveBtn");
 var eventText = document.querySelectorAll(".description");
 var timeNow = dayjs().format('HH');
 var timeBlocks = document.getElementsByClassName("row time-block");
 var heading = document.getElementById("currentDay");
 
+//Use the window.onload, so that all the functions load correctly.
 
 window.onload = function() {
   timeColour();
   savingInfo();
   getSavedInfo();
 };
-
+//Added date and time to the heading using the DAYJS and InnerHTML method
 heading.innerHTML = dayjs().format('MMMM D, YYYY h:mm A');
+//This function will set the colour blocks for the calendar. I made use of the dataset attributes. I first of all did a for loop as the timeblocks variable, is an array containing all divs for the timeblocks. After i did this, i set the current time variable to each timeBlocks[i]. I then got the data-time attribute, which states which time each timeblock corresponds. I then did an IF function, to compare the time variable to timeNow variable(which has the current time according to DAYJS). Based on the results, the data-style attribute will be amended to past present or future. As the data-style has different backgrounds in CSS the colour will change depending on what time it is.
 function timeColour() {
   console.log(timeBlocks);
   for (var i = 0; i < timeBlocks.length; i++) {
@@ -32,7 +34,7 @@ function timeColour() {
   }
   }
 timeColour();
-
+//This info, below will save information which is entered into the time blocks into the localStorage. I first did a for loop and set the variable button to equal each saveButton variable. I then added an event listener, and within this event listener. I get the ID of each time block and the information for the <textarea> element and save it to the local Storage.
 function savingInfo() {
   //event.preventDefault();
   
@@ -54,7 +56,7 @@ function savingInfo() {
 }
 
 savingInfo();
-
+//this final function, will retrieve the information for the local storage and save it so that it is still viewable on the calendar page even if it is refreshed.
 
 function getSavedInfo() {
   for (var i = 0; i < timeBlocks.length; i++) {
@@ -70,25 +72,3 @@ function getSavedInfo() {
 getSavedInfo();
 
 
-
-
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
